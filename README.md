@@ -6,5 +6,5 @@ Game Of Life - Ruby implementation with Gosu
 Just run:
 ```ruby
 $ bundle
-$ ruby game_of_life.rb
+$ ruby lib/game_of_life.rb
 ```
