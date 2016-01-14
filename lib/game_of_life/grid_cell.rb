@@ -30,8 +30,8 @@ module GameOfLife
     end
 
     def load_cell_image
-      image_path = "../game_of_life/images/#{CELL_IMAGES[self.class.name.to_sym]}"
-      
+      image_path = "./lib/game_of_life/images/#{CELL_IMAGES[self.class.name.to_sym]}"
+
       @object = Gosu::Image.new(window, image_path, true)
     end
   end
