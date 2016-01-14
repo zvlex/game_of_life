@@ -77,39 +77,47 @@ module GameOfLife
       end
     end
 
+    def add_dead_grid_cell(neighbours_quantity, cell)
+      if neighbours_quantity < 2 || neighbours_quantity > 3
+        result << DeadGridCell.new(self, cell)
+      end
+    end
+
+    def add_live_grid_cell(neighbours_quantity, cell)
+      if neighbours_quantity == 3
+        result << LiveGridCell.new(self, cell)
+      end
+    end
+
     def calculate_neighbours(world, row, column)
       neighbours_quantity = live_neighbours_quantity(row, column)
 
+      cell = CellTable.new(row, column)
+
       if world[row][column].alive?
-
-        if neighbours_quantity < 2 || neighbours_quantity > 3
-          result << DeadGridCell.new(self, CellTable.new(row, column))
-        end
+        add_dead_grid_cell(neighbours_quantity, cell)
       else
-
-        if neighbours_quantity == 3
-          result << LiveGridCell.new(self, CellTable.new(row, column))
-        end
+        add_live_grid_cell(neighbours_quantity, cell)
       end
     end
 
-  def update
-    threads = []
+    def update
+      threads = []
 
-    world.each_with_index do |cells, row|
-      cells.each_with_index do |k, column|
-        threads << Thread.new do
-          calculate_neighbours(world, row, column)
+      world.each_with_index do |cells, row|
+        cells.each_with_index do |k, column|
+          threads << Thread.new do
+            calculate_neighbours(world, row, column)
+          end
         end
+
+        threads.map(&:join)
       end
 
-      threads.map(&:join)
+      next_generation!
+      fill_cells!
+      show_output_logs
     end
-
-    next_generation!
-    fill_cells!
-    show_output_logs
-  end
 
     def show_output_logs
       if @generation >= DEFAULT_STEPS
