@@ -1,7 +1,7 @@
 Game Of Life - Ruby implementation with Gosu
 ---
 
-![Sample](https://raw.githubusercontent.com/zvlex/game_of_life/master/images/sample.gif)
+![Sample](https://raw.githubusercontent.com/zvlex/game_of_life/master/lib/game_of_life/images/sample.gif)
 
 Just run:
 ```ruby
