@@ -105,7 +105,7 @@ module GameOfLife
       threads = []
 
       world.each_with_index do |cells, row|
-        cells.each_with_index do |k, column|
+        cells.each_with_index do |_, column|
           threads << Thread.new do
             calculate_neighbours(world, row, column)
           end

@@ -1,11 +1,12 @@
 module GameOfLife
   class GridCell < Gosu::Grid::Cell
-    attr_accessor :object, :cell_table
 
     CELL_IMAGES = {
       'GameOfLife::LiveGridCell': 'live.png',
       'GameOfLife::DeadGridCell': 'dead.png'
     }
+
+    attr_accessor :object, :cell_table
 
     def initialize(obj, cell_table)
       @cell_table = cell_table
